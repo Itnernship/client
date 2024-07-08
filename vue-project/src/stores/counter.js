@@ -9,7 +9,10 @@ export const useCounterStore = defineStore(
     const setToken = (value) => {
       token.value = value
     }
-    return { token, setToken }
+    const removeToken = () => {
+      token.value = ''
+    }
+    return { token, setToken, removeToken }
   },
   {
     persist: true // 持久化
