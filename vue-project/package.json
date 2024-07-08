@@ -22,6 +22,7 @@
     "@vue/eslint-config-prettier": "^9.0.0",
     "eslint": "^8.57.0",
     "eslint-plugin-vue": "^9.23.0",
+    "pinia-plugin-persistedstate": "^3.2.1",
     "prettier": "^3.2.5",
     "unplugin-auto-import": "^0.17.6",
     "unplugin-vue-components": "^0.27.2",
