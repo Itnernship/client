@@ -64,6 +64,7 @@ const onRegister = () => {
             v-model="formModel.password"
             type="password"
             placeholder="请输入密码"
+            :show-password="true"
           ></el-input>
         </el-form-item>
 
