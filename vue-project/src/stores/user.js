@@ -6,6 +6,10 @@ export const useUserStore = defineStore(
   'user',
   () => {
     const id = ref(0)
+    const username = ref('')
+    const setUsername = (newUsername) => {
+      username.value = newUsername
+    }
     const roleList = ref([])
     const getId = () => {
       return id.value
@@ -17,7 +21,7 @@ export const useUserStore = defineStore(
       roleList.value = res.data.data
     }
 
-    return { id, getId, setId, roleList }
+    return { id, getId, setId, roleList, setUsername, username }
   },
   {
     persist: true // 持久化

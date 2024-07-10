@@ -1,9 +1,14 @@
 <script setup>
 import { ref } from 'vue'
-import { userGetAllRoleService } from '@/api/user'
+import {
+  userGetAllRoleService,
+  userEditService,
+  userAddService
+} from '@/api/user'
+import { ElMessage } from 'element-plus'
 const dialogVisible = ref(false)
-
-const formModel = ref({ userId: '', username: '', password: '', role: '' })
+const emit = defineEmits(['success'])
+const formModel = ref({ id: '', username: '', password: '', roleName: '' })
 const role = ref([])
 const openDialog = (value) => {
   formModel.value = { ...value }
@@ -11,10 +16,19 @@ const openDialog = (value) => {
   getAllRole()
 }
 
-const submit = () => {
+const submit = async () => {
   console.log(formModel.value)
   // formModel.value = { ...defaultModel }
+  if (formModel.value.id) {
+    await userEditService(formModel.value)
+    ElMessage.success('修改成功')
+  } else {
+    await userAddService(formModel.value)
+    ElMessage.success('添加成功')
+  }
+
   dialogVisible.value = false
+  emit('success')
 }
 const getAllRole = async () => {
   const res = await userGetAllRoleService()
@@ -43,13 +57,13 @@ defineExpose({ openDialog })
         ></el-input>
       </el-form-item>
       <el-form-item label="权限">
-        <el-select v-model="formModel.role" placeholder="请选择权限">
+        <el-select v-model="formModel.roleName" placeholder="请选择权限">
           <!-- 下拉框选项 -->
           <el-option
             v-for="item in role"
             :key="item.id"
             :label="item.roleName"
-            :value="item.roleCode"
+            :value="item.roleName"
           >
           </el-option
           >"

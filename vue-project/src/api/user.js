@@ -44,3 +44,13 @@ export const userGetRole = (id) => {
   // })
   return request.post('user/getPermission', { id: id })
 }
+
+//编辑用户
+export const userEditService = (value) => {
+  return request.post('user/edit', value)
+}
+
+//添加用户
+export const userAddService = (value) => {
+  return request.post('user/addRole', value)
+}

@@ -26,13 +26,16 @@
             :icon="Edit"
             @click="onEditArticle(row)"
           ></el-button>
-          <el-button
-            circle
-            plain
-            type="danger"
-            :icon="Delete"
-            @click="onDeleteArticle(row)"
-          ></el-button>
+          <el-popconfirm
+            title="你确定要删除吗"
+            confirm-button-text="确定"
+            cancel-button-text="取消"
+            @confirm="onDeleteArticle(row)"
+          >
+            ><template #reference>
+              <el-button circle plain type="danger" :icon="Delete" />
+            </template>
+          </el-popconfirm>
         </template>
       </el-table-column>
     </el-table>
@@ -48,7 +51,7 @@
       @current-change="handleCurrentChange"
       style="margin-top: 20px; justify-content: flex-end"
     />
-    <DialogManage ref="dialogRef"></DialogManage>
+    <DialogManage ref="dialogRef" @success="onSuccess"></DialogManage>
   </PageContainer>
 </template>
 
@@ -74,6 +77,9 @@ const getList = async () => {
   tableData.value = res.data.records
   loading.value = false
 }
+const onSuccess = async () => {
+  getList()
+}
 onMounted(() => {
   getList()
 })
@@ -83,13 +89,9 @@ const onEditArticle = (row) => {
 }
 //删除用户
 const onDeleteArticle = async (row) => {
-  console.log('删除的对象')
-  console.log(row)
-  // await ElMessageBox('确定删除吗？', '提示', {
-  //   confirmButtonText: '确定',
-  //   cancelButtonText: '取消',
-  //   type: 'warning'
-  // })
+  // console.log('删除的对象')
+  // console.log(row)
+
   await userDeleteService(row)
   ElMessage.success('删除成功')
   getList()

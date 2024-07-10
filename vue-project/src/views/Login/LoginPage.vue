@@ -46,6 +46,7 @@ const onLogin = async () => {
   const res = await userLoginService(formModel.value)
   counterStore.setToken(res.data.data.token)
   userStore.setId(res.data.data.id)
+  userStore.setUsername(res.data.data.username)
   router.push('/')
 }
 </script>
