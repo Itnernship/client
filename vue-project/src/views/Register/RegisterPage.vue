@@ -2,6 +2,8 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { User, Lock } from '@element-plus/icons-vue'
+import { userRegisterService } from '@/api/user'
+import { ElMessage } from 'element-plus'
 const router = useRouter()
 //表单元素
 const formModel = ref({
@@ -47,8 +49,11 @@ const rules = {
   ]
 }
 //处理注册信息
-const onRegister = () => {
+const onRegister = async () => {
   console.log(formModel.value)
+  await userRegisterService(formModel.value)
+  ElMessage.success('注册成功')
+  router.push('/login')
 }
 </script>
 <template>

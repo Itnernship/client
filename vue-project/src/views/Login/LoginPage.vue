@@ -2,6 +2,14 @@
 import { ref } from 'vue'
 import { User, Lock } from '@element-plus/icons-vue'
 import { useRouter } from 'vue-router'
+import { userLoginService } from '@/api/user'
+import { useCounterStore } from '@/stores'
+import { useUserStore } from '@/stores'
+import { use } from 'echarts'
+//用户管理
+const userStore = useUserStore()
+//状态管理
+const counterStore = useCounterStore()
 const router = useRouter()
 //绑定表单数据的元素
 const formModel = ref({
@@ -21,18 +29,24 @@ const rules = ref({
       required: true,
       message: '请输入密码',
       trigger: 'blur'
-    },
-    //正则校验 pattern表示正则表达式 message表示提示信息 trigger表示触发方式
-    {
-      pattern: /^\S{6,15}$/,
-      message: '以非空字符串开头长度为6-15位',
-      trigger: 'blur'
     }
+    // //正则校验 pattern表示正则表达式 message表示提示信息 trigger表示触发方式
+    // {
+    //   pattern: /^\S{6,15}$/,
+    //   message: '以非空字符串开头长度为6-15位',
+    //   trigger: 'blur'
+    // }
   ]
 })
 const onRegister = () => {
   console.log('注册')
   router.push('/register')
+}
+const onLogin = async () => {
+  const res = await userLoginService(formModel.value)
+  counterStore.setToken(res.data.data.token)
+  userStore.setId(res.data.data.id)
+  router.push('/')
 }
 </script>
 
@@ -69,7 +83,11 @@ const onRegister = () => {
         </el-form-item>
 
         <el-form-item>
-          <el-button class="button" type="primary" auto-insert-space
+          <el-button
+            class="button"
+            type="primary"
+            auto-insert-space
+            @click="onLogin"
             >登录</el-button
           >
         </el-form-item>

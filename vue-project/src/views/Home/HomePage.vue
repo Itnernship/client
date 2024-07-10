@@ -1,5 +1,5 @@
 <script setup>
-import { useCounterStore } from '@/stores'
+import { useCounterStore, useUserStore } from '@/stores'
 import { useRouter } from 'vue-router'
 import {
   User,
@@ -9,6 +9,7 @@ import {
 } from '@element-plus/icons-vue'
 import avatar from '@/assets/avatar.jpg'
 const router = useRouter()
+const userStore = useUserStore()
 const counterStore = useCounterStore()
 const handleCommand = async (command) => {
   if (command === 'logout') {
@@ -36,7 +37,10 @@ const handleCommand = async (command) => {
         text-color="#fff"
         router
       >
-        <el-menu-item index="/score">
+        <el-menu-item
+          index="/score"
+          v-if="userStore.roleList.includes('成绩查询')"
+        >
           <!-- <el-icon><Management /></el-icon> -->
           <span>成绩统计</span>
         </el-menu-item>
@@ -46,9 +50,15 @@ const handleCommand = async (command) => {
             <!-- <el-icon><UserFilled /></el-icon> -->
             <span>首页统计</span>
           </template>
+          <el-menu-item
+            index="/home"
+            v-if="userStore.roleList.includes('用户管理')"
+          >
+            <span>用户管理</span>
+          </el-menu-item>
         </el-sub-menu>
 
-        <el-sub-menu index="/log">
+        <el-sub-menu index="/log" v-if="userStore.roleList.includes('日志')">
           <template #title>
             <span>日志管理</span>
           </template>
@@ -57,7 +67,7 @@ const handleCommand = async (command) => {
           </el-menu-item>
         </el-sub-menu>
 
-        <el-sub-menu index="/leave">
+        <el-sub-menu index="/leave" v-if="userStore.roleList.includes('请假')">
           <!-- <el-icon><Promotion /></el-icon> -->
           <template #title>
             <!-- <el-icon><UserFilled /></el-icon> -->
@@ -68,7 +78,10 @@ const handleCommand = async (command) => {
           </el-menu-item>
         </el-sub-menu>
 
-        <el-sub-menu index="/interview">
+        <el-sub-menu
+          index="/interview"
+          v-if="userStore.roleList.includes('面试')"
+        >
           <!-- <el-icon><Promotion /></el-icon> -->
           <template #title>
             <!-- <el-icon><UserFilled /></el-icon> -->
@@ -79,7 +92,10 @@ const handleCommand = async (command) => {
           </el-menu-item>
         </el-sub-menu>
 
-        <el-sub-menu index="/system">
+        <el-sub-menu
+          index="/system"
+          v-if="userStore.roleList.includes('系统管理')"
+        >
           <!-- <el-icon><Promotion /></el-icon> -->
           <template #title>
             <!-- <el-icon><UserFilled /></el-icon> -->

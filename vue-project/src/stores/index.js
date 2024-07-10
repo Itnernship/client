@@ -7,3 +7,5 @@ pinia.use(persist)
 export default pinia
 import { useCounterStore } from './counter.js'
 export { useCounterStore }
+import { useUserStore } from './user.js'
+export { useUserStore }
