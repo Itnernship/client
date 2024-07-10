@@ -41,7 +41,9 @@ onMounted(async () => {
   tableData.value = res.data.data
   console.log(res.data.data)
 })
-const tableData = ref([])
+const tableData = ref([
+  { id: 1, name: '张三', date: '2021-01-01', content: '123' }
+])
 const add = () => {
   logDrawerRef.value.open({})
 }
