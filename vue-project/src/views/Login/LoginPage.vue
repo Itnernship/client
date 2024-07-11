@@ -5,7 +5,6 @@ import { useRouter } from 'vue-router'
 import { userLoginService } from '@/api/user'
 import { useCounterStore } from '@/stores'
 import { useUserStore } from '@/stores'
-import { use } from 'echarts'
 //用户管理
 const userStore = useUserStore()
 //状态管理
@@ -47,7 +46,9 @@ const onLogin = async () => {
   counterStore.setToken(res.data.data.token)
   userStore.setId(res.data.data.id)
   userStore.setUsername(res.data.data.username)
-  router.push('/')
+  userStore.setRoleId(res.data.data.roleId)
+  userStore.setAvatar(res.data.data.avatar)
+  router.push('/score')
 }
 </script>
 

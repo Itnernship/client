@@ -14,7 +14,7 @@ const router = createRouter({
     {
       path: '/',
       component: () => import('@/views/Home/HomePage.vue'),
-      redirect: '/score',
+      redirect: '/login',
       children: [
         {
           path: '/user/profile',
@@ -55,19 +55,19 @@ const router = createRouter({
 
 export default router
 //如果undefinde / true直接放行
-router.beforeEach((to) => {
-  //to: 访问的路径
-  //from: 从哪个路径跳转过来
-  //next: 放行
-  //next()
-  //next('/login')
-  //next(false)
-  //next(path)
-  //next({ path: '/login' })
-  //next({ name: 'login' })
-  //next({ name: 'login', query: { from: to.path } })
-  // const userStore = useCounterStore()
-  // if (!userStore.token && to.path !== '/login' && to.path !== '/register') {
-  //   return '/login'
-  // }
-})
+// router.beforeEach((to) => {
+//   //to: 访问的路径
+//   //from: 从哪个路径跳转过来
+//   //next: 放行
+//   //next()
+//   //next('/login')
+//   //next(false)
+//   //next(path)
+//   //next({ path: '/login' })
+//   //next({ name: 'login' })
+//   //next({ name: 'login', query: { from: to.path } })
+//   // const userStore = useCounterStore()
+//   // if (!userStore.token && to.path !== '/login' && to.path !== '/register') {
+//   //   return '/login'
+//   // }
+// })

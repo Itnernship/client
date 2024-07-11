@@ -28,6 +28,7 @@ const initChart = () => {
 // 绘制图表
 const renderChart = () => {
   const dataList = props.dataList // 假设 props.dataList 是您的数据数组
+  console.log(dataList)
 
   const option = {
     title: {
@@ -46,7 +47,7 @@ const renderChart = () => {
       {
         name: 'Access From',
         type: 'pie',
-        radius: '50%',
+        radius: '40%',
         data: [
           {
             value: dataList.filter(
@@ -104,7 +105,9 @@ const resizeChart = () => {
 }
 
 onMounted(() => {
-  initChart()
+  setTimeout(() => {
+    initChart()
+  }, 1000)
 })
 
 onBeforeUnmount(() => {
@@ -127,7 +130,7 @@ onBeforeUnmount(() => {
 }
 
 .echarts-chart {
-  width: 500px;
+  width: 600px;
   height: 400px;
 }
 </style>

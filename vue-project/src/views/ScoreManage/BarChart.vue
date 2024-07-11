@@ -59,7 +59,7 @@ onMounted(() => {
   console.log(props.dataList)
   setTimeout(() => {
     initChart()
-  }, 1000)
+  }, 2000)
 })
 
 onBeforeUnmount(() => {

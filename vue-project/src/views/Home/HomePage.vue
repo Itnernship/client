@@ -1,16 +1,21 @@
 <script setup>
 import { useCounterStore, useUserStore } from '@/stores'
 import { useRouter } from 'vue-router'
+import { onBeforeUnmount } from 'vue'
+import { userDestroyService } from '@/api/user'
 import {
   User,
   EditPen,
   SwitchButton,
   CaretBottom
 } from '@element-plus/icons-vue'
-import avatar from '@/assets/avatar.jpg'
+
 const router = useRouter()
 const userStore = useUserStore()
 const counterStore = useCounterStore()
+const destoryUser = async () => {
+  await userDestroyService(userStore.id)
+}
 const handleCommand = async (command) => {
   if (command === 'logout') {
     await ElMessageBox.confirm('你确认退出系统吗？', '温馨提示', {
@@ -25,6 +30,18 @@ const handleCommand = async (command) => {
     router.push(`/user/${command}`)
   }
 }
+const imgurl = () => {
+  if (userStore.avatar) {
+    const url = `https://113.56.219.99:50000/files/${userStore.avatar}`
+    return url
+  } else {
+    return '@/assets/logo.png'
+  }
+}
+onBeforeUnmount(() => {
+  destoryUser()
+  counterStore.removeToken()
+})
 </script>
 <template>
   <el-container class="layout-container">
@@ -128,7 +145,7 @@ const handleCommand = async (command) => {
         </div>
         <el-dropdown placement="bottom-end" @command="handleCommand">
           <span class="el-dropdown__box">
-            <el-avatar :src="avatar" />
+            <el-avatar :src="imgurl()" />
             <el-icon><CaretBottom /></el-icon>
           </span>
           <template #dropdown>

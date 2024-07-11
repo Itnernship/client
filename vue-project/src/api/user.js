@@ -1,8 +1,8 @@
 import request from '@/utils/request'
 import axios from 'axios'
 
-export const userRegisterService = ({ username, password }) => {
-  return request.post('user/register', { username, password })
+export const userRegisterService = ({ username, password, avatar }) => {
+  return request.post('user/register', { username, password, avatar })
 }
 
 export const userLoginService = ({ username, password }) => {
@@ -53,4 +53,14 @@ export const userEditService = (value) => {
 //添加用户
 export const userAddService = (value) => {
   return request.post('user/addRole', value)
+}
+
+//销毁用户
+export const userDestroyService = (id) => {
+  return request.post('user/logout', { id: id })
+}
+
+//修改密码
+export const userChangePasswordService = (value) => {
+  return request.post('user/forget', value)
 }

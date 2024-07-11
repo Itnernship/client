@@ -6,7 +6,7 @@
     <el-table v-loading="loading" :data="tableData" border style="width: 100%">
       <el-table-column prop="username" label="姓名" width="180" />
       <el-table-column prop="password" label="密码" width="180" />
-      <el-table-column prop="roleName" label="权限" />
+      <el-table-column prop="roleName" label="角色" />
       <el-table-column prop="createTime" label="创建时间">
         <template #default="scope">{{
           dayjs(scope.createTime).format('YYYY-MM-DD')

@@ -40,20 +40,27 @@
 import { ref } from 'vue'
 import { QuillEditor } from '@vueup/vue-quill'
 import { useUserStore } from '@/stores'
-
+import { addLogService } from '@/api/log'
 import '@vueup/vue-quill/dist/vue-quill.snow.css'
+import { ElMessage } from 'element-plus'
+//向父组件传递信息
+const emit = defineEmits(['success'])
 const userStore = useUserStore()
 const visibleDrawer = ref(false)
 const formInline = ref({
   content: ''
 })
-const onAdd = () => {
+const onAdd = async () => {
   console.log(formInline.value.content)
   const data = {
-    username: userStore.username,
+    name: userStore.username,
     content: formInline.value.content
   }
   console.log(data)
+
+  await addLogService(data)
+  await ElMessage.success('添加成功')
+  emit('success')
   visibleDrawer.value = false
 }
 const handleKeyDown = (e) => {
