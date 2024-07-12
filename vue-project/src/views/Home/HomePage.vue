@@ -119,20 +119,20 @@ onBeforeUnmount(() => {
             <span>系统管理</span>
           </template>
           <el-menu-item index="/system">
-            <span>系统</span>
+            <span>角色管理</span>
           </el-menu-item>
         </el-sub-menu>
 
-        <el-sub-menu index="">
-          <!-- <el-icon><Promotion /></el-icon> -->
+        <!-- <el-sub-menu index="">
+          <el-icon><Promotion /></el-icon>
           <template #title>
-            <!-- <el-icon><UserFilled /></el-icon> -->
+            <el-icon><UserFilled /></el-icon>
             <span>实例</span>
           </template>
           <el-menu-item index="">
             <span>比如</span>
           </el-menu-item>
-        </el-sub-menu>
+        </el-sub-menu> -->
       </el-menu>
     </el-aside>
     <el-container>
@@ -150,9 +150,9 @@ onBeforeUnmount(() => {
           </span>
           <template #dropdown>
             <el-dropdown-menu>
-              <el-dropdown-item command="profile" :icon="User"
+              <!-- <el-dropdown-item command="profile" :icon="User"
                 >基本资料</el-dropdown-item
-              >
+              > -->
               <el-dropdown-item command="password" :icon="EditPen"
                 >重置密码</el-dropdown-item
               >

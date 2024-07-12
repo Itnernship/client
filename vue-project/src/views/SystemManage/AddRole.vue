@@ -25,6 +25,8 @@ const addRole = async () => {
   await addRoleService(form.value)
   ElMessage.success('添加成功')
   console.log(form.value)
+  //清空form
+  form.value = { roleName: '' }
   dialogVisible.value = false
   emit('success')
 }

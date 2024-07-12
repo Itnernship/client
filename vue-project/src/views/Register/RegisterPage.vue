@@ -57,13 +57,14 @@ const onRegister = async () => {
   ElMessage.success('注册成功')
   router.push('/login')
 }
-const st = ref(false)
-const imageUrl = ref('https://113.56.219.99:50000/files/${userStore.avatar}')
+// const st = ref(false)
+// const imageUrl = ref('https://113.56.219.99:50000/files/${userStore.avatar}')
+const imageUrl = ref('')
 const handleAvatarSuccess = (response, uploadFile) => {
   imageUrl.value = URL.createObjectURL(uploadFile.raw)
   // console.log(response)
   formModel.value.avatar = response.data
-  st.value = true
+  // st.value = true
 }
 
 const beforeAvatarUpload = (rawFile) => {
@@ -124,7 +125,7 @@ const beforeAvatarUpload = (rawFile) => {
           :on-success="handleAvatarSuccess"
           :before-upload="beforeAvatarUpload"
         >
-          <img v-if="st" :src="imageUrl" class="avatar" />
+          <img v-if="imageUrl" :src="imageUrl" class="avatar" />
           <el-icon v-else class="avatar-uploader-icon"><Plus /></el-icon>
         </el-upload>
 

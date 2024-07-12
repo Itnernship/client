@@ -5,6 +5,7 @@ import { useRouter } from 'vue-router'
 import { userLoginService } from '@/api/user'
 import { useCounterStore } from '@/stores'
 import { useUserStore } from '@/stores'
+import { ElMessage } from 'element-plus'
 //用户管理
 const userStore = useUserStore()
 //状态管理
@@ -48,7 +49,11 @@ const onLogin = async () => {
   userStore.setUsername(res.data.data.username)
   userStore.setRoleId(res.data.data.roleId)
   userStore.setAvatar(res.data.data.avatar)
-  router.push('/score')
+  ElMessage.success('登录成功')
+  setTimeout(() => {
+    router.push('/score')
+  }, 1000)
+  // router.push('/score')
 }
 </script>
 

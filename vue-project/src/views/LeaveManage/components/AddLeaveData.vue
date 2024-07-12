@@ -53,7 +53,6 @@ defineExpose({
           type="daterange"
           start-placeholder="Start date"
           end-placeholder="End date"
-          :default-time="defaultTime"
         />
       </el-form-item>
 

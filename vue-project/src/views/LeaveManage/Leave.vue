@@ -18,22 +18,13 @@ const addLeaveRef = ref(null)
 //查看请假条
 const checkLeaveMsgRef = ref(null)
 //表单数据
-const tableData = ref([
-  {
-    id: 1,
-    applicantName: '张三',
-    leaveSort: '事假',
-    startTime: '2022-01-01',
-    endTime: '2022-01-02',
-    reason: '回家',
-    status: '已通过'
-  }
-])
+const tableData = ref([])
 
 const getLeaveList = async () => {
   const res = await getLeaveService()
-  console.log(res)
+  // console.log(res)
   const dataList = res.data.data
+  // if (dataList.length === 0) return
   tableData.value = dataList.filter((item) => {
     if (item.applicantId === userStore.id) return true
     if (userStore.roleId === 1 || userStore.roleId === 4) return true
@@ -41,7 +32,8 @@ const getLeaveList = async () => {
     if (userStore.roleId === 2 && item.leaveStatus > 1) return true
     return false
   })
-  console.log(tableData.value)
+  if (tableData.value.length === 0) tableData.value = []
+  // console.log(tableData.value)
 }
 //删除请假信息
 const onDeleteArticle = async (id) => {

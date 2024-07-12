@@ -9,14 +9,6 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  devServer: {
-    proxy: {
-      '/user': {
-        target: 'https://113.56.219.99:50000',
-        changeOrigin: true
-      }
-    }
-  },
   plugins: [
     vue(),
     AutoImport({
